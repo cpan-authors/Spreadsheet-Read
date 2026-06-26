@@ -6,9 +6,9 @@ requires   "Exporter";
 requires   "File::Temp"               => "0.22";  # ignore : CVE-2011-4116
 requires   "List::Util";
 
-recommends "Data::Dumper"             => "2.183";
-recommends "Data::Peek"               => "0.53";
-recommends "Encode"                   => "3.21";
+recommends "Data::Dumper"             => "2.192";
+recommends "Data::Peek"               => "0.54";
+recommends "Encode"                   => "3.24";
 recommends "File::Temp"               => "0.2312";
 recommends "IO::Scalar";
 
@@ -17,7 +17,7 @@ on "configure" => sub {
 
     recommends "ExtUtils::MakeMaker"      => "7.22";
 
-    suggests   "ExtUtils::MakeMaker"      => "7.76";
+    suggests   "ExtUtils::MakeMaker"      => "7.78";
     };
 
 on "test" => sub {
@@ -25,7 +25,7 @@ on "test" => sub {
     requires   "Test::More"               => "0.88";
     requires   "Test::NoWarnings";
 
-    recommends "Test::More"               => "1.302219";
+    recommends "Test::More"               => "1.302222";
     };
 
 feature "opt_csv", "Provides parsing of CSV streams" => sub {
@@ -33,7 +33,7 @@ feature "opt_csv", "Provides parsing of CSV streams" => sub {
 
     recommends "Text::CSV"                => "2.06";
     recommends "Text::CSV_PP"             => "2.06";
-    recommends "Text::CSV_XS"             => "1.61";
+    recommends "Text::CSV_XS"             => "1.64";
     };
 
 feature "opt_gnumeric", "Provides parsing of Gnumeric spreadsheets" => sub {
@@ -73,5 +73,5 @@ feature "opt_xlsx", "Provides parsing of Microsoft Excel 2007 files" => sub {
     requires   "Spreadsheet::ParseExcel::FmtDefault";
     requires   "Spreadsheet::ParseXLSX"   => "0.24";
 
-    recommends "Spreadsheet::ParseXLSX"   => "0.36";
+    recommends "Spreadsheet::ParseXLSX"   => "0.37";
     };

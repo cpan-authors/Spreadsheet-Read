@@ -67,19 +67,19 @@ configure_requires:
 configure_recommends:
   ExtUtils::MakeMaker:  7.22
 configure_suggests:
-  ExtUtils::MakeMaker:  7.76
+  ExtUtils::MakeMaker:  7.78
 test_requires:
   Test::Harness:        0
   Test::More:           0.88
   Test::NoWarnings:     0
 recommends:
   IO::Scalar:           0
-  Encode:               3.21
+  Encode:               3.24
   File::Temp:           0.2312
-  Data::Peek:           0.53
-  Data::Dumper:         2.183
+  Data::Peek:           0.54
+  Data::Dumper:         2.192
 test_recommends:
-  Test::More:           1.302219
+  Test::More:           1.302222
 resources:
   license:              http://dev.perl.org/licenses/
   repository:           https://github.com/Tux/Spreadsheet-Read
@@ -95,7 +95,7 @@ optional_features:
     recommends:
       Text::CSV:                           2.06
       Text::CSV_PP:                        2.06
-      Text::CSV_XS:                        1.61
+      Text::CSV_XS:                        1.64
   opt_xls:
     description:        Provides parsing of Microsoft Excel files
     requires:
@@ -111,7 +111,7 @@ optional_features:
       Spreadsheet::ParseXLSX:              0.24
       Spreadsheet::ParseExcel::FmtDefault: 0
     recommends:
-      Spreadsheet::ParseXLSX:              0.36
+      Spreadsheet::ParseXLSX:              0.37
   opt_ods:
     description:        Provides parsing of OpenOffice spreadsheets
     requires:
