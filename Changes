@@ -1,6 +1,7 @@
-0.95	- 26 Jun 2026, H.Merijn Brand
+0.95	- 29 Jun 2026, H.Merijn Brand
     * It's 2026
     * Required/suggested versions because fixed CVE's in Text::CSV_XS
+    * Request to compress when saving to zip (erix)
 
 0.94	- 09 Dec 2025, H.Merijn Brand
     * Add label2col ()

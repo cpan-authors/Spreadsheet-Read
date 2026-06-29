@@ -1,14 +1,14 @@
 #!/usr/bin/perl
 
 # xls2csv: Convert supported spreadsheet formats to CSV
-#	   (m)'24 [2024-12-16] Copyright H.M.Brand 2008-2026
+#	   (m)'26 [2026-06-29] Copyright H.M.Brand 2008-2026
 
 require 5.008001;
 
 use strict;
 use warnings;
 
-our $VERSION = "3.11";
+our $VERSION = "3.14";
 (my $cmd = $0) =~ s{.*/}{};
 
 use Text::CSV_XS;
@@ -131,7 +131,8 @@ if ($opt_A || $opt_Z) {
 	    open my $fh, ">:encoding(utf-8)", \my $data;
 	    $csv->print ($fh, [ row ($s, $_) ]) for 1 .. $mr;
 	    close $fh;
-	    $az->addString ($data, "$sn.csv");
+	    my $sm = $az->addString ($data, "$sn.csv");
+	    $sm->desiredCompressionMethod (Archive::Zip::COMPRESSION_DEFLATED);
 	    next;
 	    }
 	my $fn = $opt_N ? "$sn.csv" : "$xls$opt_J$sn.csv";
