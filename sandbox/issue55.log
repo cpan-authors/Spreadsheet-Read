@@ -1,0 +1,121 @@
+PERL_DL_NONLAZY=1 "/usr/local/bin/perl" "-MExtUtils::Command::MM" "-MTest::Harness" "-e" "undef *Test::Harness::Switches; test_harness(0, 'blib/lib', 'blib/arch')" t/*.t
+
+#   Failed test 'no warnings'
+#   at /usr/local/lib/perl5/5.36/Test/Builder.pm line 193.
+# There were 4 warning(s)
+#     Previous test 115 'Illegal ReadData ({ HASH(0x11ccf33f2e58) })'
+#     Use of uninitialized value in string eq at /wrkdirs/usr/ports/textproc/p5-Spreadsheet-Read/work/Spreadsheet-Read-0.93/blib/lib/Spreadsheet/Read.pm line 246.
+#  at /wrkdirs/usr/ports/textproc/p5-Spreadsheet-Read/work/Spreadsheet-Read-0.93/blib/lib/Spreadsheet/Read.pm line 246.
+#       Spreadsheet::Read::parsers("Spreadsheet::Read") called at t/10_basics.t line 115
+#
+# ----------
+#     Previous test 115 'Illegal ReadData ({ HASH(0x11ccf33f2e58) })'
+#     Use of uninitialized value in string eq at /wrkdirs/usr/ports/textproc/p5-Spreadsheet-Read/work/Spreadsheet-Read-0.93/blib/lib/Spreadsheet/Read.pm line 246.
+#  at /wrkdirs/usr/ports/textproc/p5-Spreadsheet-Read/work/Spreadsheet-Read-0.93/blib/lib/Spreadsheet/Read.pm line 246.
+#       Spreadsheet::Read::parsers("Spreadsheet::Read") called at t/10_basics.t line 115
+#
+# ----------
+#     Previous test 115 'Illegal ReadData ({ HASH(0x11ccf33f2e58) })'
+#     Use of uninitialized value in string eq at /wrkdirs/usr/ports/textproc/p5-Spreadsheet-Read/work/Spreadsheet-Read-0.93/blib/lib/Spreadsheet/Read.pm line 246.
+#  at /wrkdirs/usr/ports/textproc/p5-Spreadsheet-Read/work/Spreadsheet-Read-0.93/blib/lib/Spreadsheet/Read.pm line 246.
+#       Spreadsheet::Read::parsers("Spreadsheet::Read") called at t/10_basics.t line 115
+#
+# ----------
+#     Previous test 115 'Illegal ReadData ({ HASH(0x11ccf33f2e58) })'
+#     Use of uninitialized value in string eq at /wrkdirs/usr/ports/textproc/p5-Spreadsheet-Read/work/Spreadsheet-Read-0.93/blib/lib/Spreadsheet/Read.pm line 246.
+#  at /wrkdirs/usr/ports/textproc/p5-Spreadsheet-Read/work/Spreadsheet-Read-0.93/blib/lib/Spreadsheet/Read.pm line 246.
+#       Spreadsheet::Read::parsers("Spreadsheet::Read") called at t/10_basics.t line 115
+#
+# Looks like you failed 1 test of 118.
+t/10_basics.t .....
+Dubious, test returned 1 (wstat 256, 0x100)
+Failed 1/118 subtests
+t/11_call.t ....... ok
+# Parser: Text::CSV_XS-1.60
+t/200_csv.t ....... ok
+t/201_csv.t ....... ok
+t/202_csv.t ....... ok
+t/203_csv.t ....... ok
+t/204_csv.t ....... ok
+t/205_csv.t ....... ok
+# Parser: Text::CSV_XS-1.60
+t/210_csv.t ....... ok
+t/211_csv.t ....... ok
+t/212_csv.t ....... ok
+t/213_csv.t ....... ok
+t/214_csv.t ....... ok
+# Parser: Text::CSV_PP-2.06
+t/220_csv.t ....... ok
+t/221_csv.t ....... ok
+t/222_csv.t ....... ok
+t/223_csv.t ....... ok
+t/224_csv.t ....... ok
+# Parser: Spreadsheet::ParseExcel-0.66
+t/30_xls.t ........ ok
+t/31_clr.t ........ ok
+t/32_fmt.t ........ ok
+t/33_misc.t ....... ok
+t/34_dates.t ...... ok
+t/35_perc.t ....... ok
+t/36_xls.t ........ ok
+t/37_merged.t ..... ok
+t/410_ods.t ....... skipped: Cannot use Spreadsheet::ParseODS
+t/411_clr.t ....... skipped: Cannot use Spreadsheet::ParseODS
+t/412_fmt.t ....... skipped: Cannot use Spreadsheet::ParseODS
+t/413_misc.t ...... skipped: Cannot use Spreadsheet::ParseODS
+t/414_dates.t ..... skipped: Cannot use Spreadsheet::ParseODS
+t/415_perc.t ...... skipped: Cannot use Spreadsheet::ParseODS
+t/417_merged.t .... skipped: Cannot use Spreadsheet::ParseODS
+t/420_sxc.t ....... skipped: No SXC parser found
+t/425_ods.t ....... skipped: No SXC parser found
+t/426_clr.t ....... ok
+# Parser: Spreadsheet::Read-0.93
+t/50_sc.t ......... ok
+t/51_sc.t ......... ok
+# Parser: Spreadsheet::ParseXLSX-0.27
+t/600_xlsx.t ...... ok
+t/601_clr.t ....... ok
+t/602_fmt.t ....... ok
+t/603_misc.t ...... ok
+t/604_dates.t ..... ok
+t/605_perc.t ...... ok
+t/607_merged.t .... ok
+# Parser: Spreadsheet::ParseXLSX-0.27
+t/610_xlsx.t ...... ok
+t/611_clr.t ....... ok
+t/612_fmt.t ....... ok
+t/613_misc.t ...... ok
+t/614_dates.t ..... ok
+t/615_perc.t ...... ok
+t/617_merged.t .... ok
+t/620_xlsx.t ...... skipped: Cannot use Spreadsheet::XLSX
+t/621_clr.t ....... skipped: Cannot use Spreadsheet::XLSX
+t/622_fmt.t ....... skipped: Cannot use Spreadsheet::XLSX
+t/623_misc.t ...... skipped: Cannot use Spreadsheet::XLSX
+t/624_dates.t ..... skipped: Cannot use Spreadsheet::XLSX
+t/625_perc.t ...... skipped: Cannot use Spreadsheet::XLSX
+t/627_merged.t .... ok
+t/630_xlsx.t ...... skipped: Cannot use Excel::ValueReader::XLSX
+t/631_clr.t ....... skipped: Cannot use Excel::ValueReader::XLSX
+t/632_fmt.t ....... skipped: Cannot use Excel::ValueReader::XLSX
+t/633_misc.t ...... skipped: Cannot use Excel::ValueReader::XLSX
+t/634_dates.t ..... skipped: Cannot use Excel::ValueReader::XLSX
+t/635_perc.t ...... skipped: Cannot use Excel::ValueReader::XLSX
+t/637_merged.t .... skipped: Cannot use Excel::ValueReader::XLSX
+# Parser: Spreadsheet::ReadGnumeric-0.4
+t/700_gnumeric.t .. ok
+t/701_clr.t ....... ok
+t/702_fmt.t ....... ok
+t/704_dates.t ..... ok
+t/707_merged.t .... ok
+t/999_fail.t ...... ok
+
+Test Summary Report
+-------------------
+t/10_basics.t   (Wstat: 256 (exited 1) Tests: 118 Failed: 1)
+  Failed test:  118
+  Non-zero exit status: 1
+Files=72, Tests=4908, 18 wallclock secs ( 0.29 usr  0.07 sys + 15.58 cusr  1.60 csys = 17.54 CPU)
+Result: FAIL
+Failed 1/72 test programs. 1/4908 subtests failed.
+*** Error code 255

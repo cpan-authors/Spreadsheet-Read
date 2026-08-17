@@ -243,7 +243,7 @@ sub parsers {
 	    mod => $mod,
 	    min => $min,
 	    vsn => $vsn,
-	    def => ($can{$typ} // "") eq $mod ? "*" : "",
+	    def => (defined $can{$typ} ? $can{$typ} : "") eq $mod ? "*" : "",
 	    };
 	}
     @c;

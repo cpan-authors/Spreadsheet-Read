@@ -70,6 +70,7 @@ files/values.xls
 files/values.xlsx
 t/10_basics.t
 t/11_call.t
+t/12_parsers.t
 t/200_csv.t
 t/201_csv.t
 t/202_csv.t
