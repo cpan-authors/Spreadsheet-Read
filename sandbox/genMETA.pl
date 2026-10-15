@@ -46,7 +46,7 @@ version:                VERSION
 abstract:               Meta-Wrapper for reading spreadsheet data
 license:                perl
 author:
-  - H.Merijn Brand <HMBRAND@cpan.org>
+  - H.Merijn Brand <perl5@tux.freedom.nl>
 generated_by:           Author
 distribution_type:      module
 provides:
@@ -79,7 +79,7 @@ recommends:
   Data::Peek:           0.54
   Data::Dumper:         2.192
 test_recommends:
-  Test::More:           1.302222
+  Test::More:           1.302225
 resources:
   license:              http://dev.perl.org/licenses/
   repository:           https://github.com/Tux/Spreadsheet-Read
@@ -95,7 +95,7 @@ optional_features:
     recommends:
       Text::CSV:                           2.06
       Text::CSV_PP:                        2.06
-      Text::CSV_XS:                        1.64
+      Text::CSV_XS:                        1.65
   opt_xls:
     description:        Provides parsing of Microsoft Excel files
     requires:
