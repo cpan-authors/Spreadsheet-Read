@@ -100,7 +100,7 @@ sub usage {
     } # usage
 
 use Encode     qw( encode decode );
-use List::Util qw( first );
+use List::Util qw( first max );
 use Data::Dumper;
 use Spreadsheet::Read;
 use Getopt::Long qw(:config bundling noignorecase passthrough);
@@ -631,6 +631,25 @@ foreach my $si (1 .. $sc) {
 	}
     $opt_n = 0;
     if ($opt_L) {
+	# Cater for embedded newlines
+	for (my $r = 0; $r <= $#data; $r++) {
+	    my ($row, $att) = @{$data[$r]};
+	    "@$row" =~ m/\n/ or next;
+	    my @cc = map {[ split m/\s*\r?\n/ => $row->[$_] ]} 0 .. $#$row;
+	    my $nr = max map { scalar @$_ } @cc;
+	    for (@cc) {
+		scalar @$_ < $nr and push @$_ => ("") x ($nr - @$_);
+		}
+	    # make space
+	    foreach my $l (($r + 1) .. $#data) {
+		$data[$l + $nr - 1] = $data[$l];
+		}
+	    foreach my $l (0 .. ($nr - 1)) {
+		$data[$r + $l] = [
+		    [ map { $cc[$_][$l]     } 0..$#$row ],
+		    [ map {[ @{$att->[$_]} ]} 0..$#$row ]];
+		}
+	    }
 	foreach my $r (0 .. $#data) {
 	    my $R = $data[$r][0];
 	    foreach my $c (0 .. $#$R) {
@@ -739,3 +758,4 @@ END {
 	    }
 	}
     }
+
