@@ -646,8 +646,8 @@ foreach my $si (1 .. $sc) {
 		}
 	    foreach my $l (0 .. ($nr - 1)) {
 		$data[$r + $l] = [
-		    [ map { $cc[$_][$l]     } 0..$#$row ],
-		    [ map {[ @{$att->[$_]} ]} 0..$#$row ]];
+		    [ map { $cc[$_][$l]           } 0..$#$row ],
+		    [ map {[ @{$att->[$_] || []} ]} 0..$#$row ]];
 		}
 	    }
 	foreach my $r (0 .. $#data) {
