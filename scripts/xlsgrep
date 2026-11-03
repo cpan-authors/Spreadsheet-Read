@@ -641,8 +641,8 @@ foreach my $si (1 .. $sc) {
 		scalar @$_ < $nr and push @$_ => ("") x ($nr - @$_);
 		}
 	    # make space
-	    foreach my $l (($r + 1) .. $#data) {
-		$data[$l + $nr - 1] = $data[$l];
+	    foreach my $l (reverse (($r + 1) .. $#data)) {
+		$data[$l + $nr - 1] = [ @{$data[$l]} ];
 		}
 	    foreach my $l (0 .. ($nr - 1)) {
 		$data[$r + $l] = [
