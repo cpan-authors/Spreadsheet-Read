@@ -2,14 +2,14 @@
 
 # xlscat:  show supported spreadsheet file as Text
 # xlsgrep: grep pattern
-#	   (m)'24 [2024-12-31] Copyright H.M.Brand 2005-2026
+#	   (m)'26 [2026-11-03] Copyright H.M.Brand 2005-2026
 
 require 5.008001;
 
 use strict;
 use warnings;
 
-our $VERSION = "3.32";
+our $VERSION = "3.33";
 (my $CMD = $0) =~ s{.*[\/]}{};
 
 my $is_grep = $0 =~ m/grep$/;	# xlsgrep
@@ -53,6 +53,7 @@ sub usage {
 	"       -n [skip]   Number lines (prefix with column number)",
 	"                   optionally skip <skip> (header) lines",
 	"       -A          Show field attributes in ANSI escapes",
+	"                or alternate background on boxed CSV input",
 	"       -h[#]       Show # header lines",
 	"       -D          Dump each record with Data::Peek or Data::Dumper",
 	"        --hash     Like -D but as hash with first row as keys",
@@ -654,6 +655,7 @@ foreach my $si (1 .. $sc) {
 	}
 
     $opt_B and line (1, $opt_s => map { "-" x $w[$_] } 0..$#{$data[0][0]});
+    my $ri = 1;
     for (@data) {
 	my ($row, $att) = @$_;
 	my @row = @$row;
@@ -667,13 +669,19 @@ foreach my $si (1 .. $sc) {
 		substr $row[$_], 0, 0, $w;
 		}
 	    if ($opt_A) {
-		substr $row[$_], 0, 0, ansi_color (@{$att->[$_]});
-		$row[$_] .= "\e[0m";
+		if ($opt_B && $xls->[0]{parser} =~ m/::CSV/ and $ri % 2) {
+		    $row[$_] = sprintf "\e[40;37;7m%-*s\e[0m", $l, $row[$_];
+		    }
+		else {
+		    substr $row[$_], 0, 0, ansi_color (@{$att->[$_]});
+		    $row[$_] .= "\e[0m";
+		    }
 		}
 	    }
 	line (0, $opt_s => @row);
 	++$opt_n == $opt_h and
 	    line (2, $opt_s => map { "-" x $w[$_] } 0..$#row);
+	$ri++;
 	}
     $opt_B and line (3, $opt_s => map { "-" x $w[$_] } 0..$#{$data[0][0]});
     }
