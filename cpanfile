@@ -8,7 +8,7 @@ requires   "List::Util";
 
 recommends "Data::Dumper"             => "2.192";
 recommends "Data::Peek"               => "0.54";
-recommends "Encode"                   => "3.24";
+recommends "Encode"                   => "3.25";
 recommends "File::Temp"               => "0.2312";
 recommends "IO::Scalar";
 
@@ -25,7 +25,7 @@ on "test" => sub {
     requires   "Test::More"               => "0.88";
     requires   "Test::NoWarnings";
 
-    recommends "Test::More"               => "1.302225";
+    recommends "Test::More"               => "1.302226";
     };
 
 feature "opt_csv", "Provides parsing of CSV streams" => sub {

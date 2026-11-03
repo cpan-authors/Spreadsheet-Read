@@ -74,12 +74,12 @@ test_requires:
   Test::NoWarnings:     0
 recommends:
   IO::Scalar:           0
-  Encode:               3.24
+  Encode:               3.25
   File::Temp:           0.2312
   Data::Peek:           0.54
   Data::Dumper:         2.192
 test_recommends:
-  Test::More:           1.302225
+  Test::More:           1.302226
 resources:
   license:              http://dev.perl.org/licenses/
   repository:           https://github.com/Tux/Spreadsheet-Read
