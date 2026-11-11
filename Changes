@@ -1,10 +1,10 @@
-0.96	- 03 Nov 2026, H.Merijn Brand
+0.96	- 11 Nov 2026, H.Merijn Brand
     * Required/suggested versions because fixed CVE's in Text::CSV_XS
     * Request to compress when saving to zip (erix)
     * Make ->parsers more robust (PR#57, thanks Todd)
     * WARNING: the next release is likely to require perl-5.12
     * cpan.org stopped as service for mail
-    * xlscat --box -A for CSV alternated row background
+    * xlscat -A for CSV alternated row background for aligned data
 
 0.95	- 15 Oct 2026, H.Merijn Brand
     * It's 2026

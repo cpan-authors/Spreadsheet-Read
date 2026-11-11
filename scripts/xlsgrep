@@ -2,14 +2,14 @@
 
 # xlscat:  show supported spreadsheet file as Text
 # xlsgrep: grep pattern
-#	   (m)'26 [2026-11-03] Copyright H.M.Brand 2005-2026
+#	   (m)'26 [2026-11-11] Copyright H.M.Brand 2005-2026
 
 require 5.008001;
 
 use strict;
 use warnings;
 
-our $VERSION = "3.33";
+our $VERSION = "3.34";
 (my $CMD = $0) =~ s{.*[\/]}{};
 
 my $is_grep = $0 =~ m/grep$/;	# xlsgrep
@@ -205,6 +205,7 @@ $opt_i && $opt_H and usage 1, "Options i and H are mutually exclusive";
 $opt_c && $opt_H and usage 1, "Options c and H are mutually exclusive";
 $opt_s && $opt_H and usage 1, "Options s and H are mutually exclusive";
 
+my $row_idx = 1;
 my %e = (a => "\a", b => "\b", e => "\e", f => "\f", n => "\n", r => "\r", t => "\t");
 $opt_s and $opt_s =~ s/\\+([abefnrt])/$e{$1}/g;
 defined $opt_S or $opt_S = $opt_i || $is_grep ? "all" : "1";
@@ -397,7 +398,7 @@ sub ansi_color {
 	color_reduce ($fg, 30),
 	color_reduce ($bg, 40);
 
-    "\e[${attr}m";
+    $attr eq "0" ? "" : "\e[${attr}m";
     } # ansi_color
 
 sub css_color {
@@ -587,10 +588,8 @@ foreach my $si (1 .. $sc) {
 	    }
 	if ($opt_A) {
 	    foreach my $c (0 .. $#row) {
-		$row[$c] =
-		    ansi_color (@{$att[$c]}).
-		    $row[$c] .
-		    "\e[0m";
+		my $ac = ansi_color (@{$att[$c]}) or next;
+		$row[$c] = "$ac$row[$c]\e[0m";
 		}
 	    }
 	line (0, $opt_s => @row);
@@ -687,14 +686,8 @@ foreach my $si (1 .. $sc) {
 	    else {
 		substr $row[$_], 0, 0, $w;
 		}
-	    if ($opt_A) {
-		if ($opt_B && $xls->[0]{parser} =~ m/::CSV/ and $ri % 2) {
-		    $row[$_] = sprintf "\e[40;37;7m%-*s\e[0m", $l, $row[$_];
-		    }
-		else {
-		    substr $row[$_], 0, 0, ansi_color (@{$att->[$_]});
-		    $row[$_] .= "\e[0m";
-		    }
+	    if ($opt_A and my $ac = ansi_color (@{$att->[$_]})) {
+		$row[$_] = "$ac$row[$_]\e[0m";
 		}
 	    }
 	line (0, $opt_s => @row);
@@ -707,15 +700,20 @@ foreach my $si (1 .. $sc) {
 $opt_H and print "</body>\n</html>\n";
 
 sub line {
+    my ($type, $sep, @dta) = @_; # type: 0: data, 1: top, 2: middle, 3: bottom
+
     my $uh   = "\x{2500}";	# BOX DRAWINGS LIGHT HORIZONTAL
     my $uv   = "\x{2502}";
     my @tpl  = ($uv, "\x{250c}", "\x{251c}", "\x{2514}");
     my @tpm  = ($uv, "\x{252c}", "\x{253c}", "\x{2534}");
     my @tpr  = ($uv, "\x{2510}", "\x{2524}", "\x{2518}");
 
-    my $type = shift; # 0: data, 1: top, 2: middle, 3: bottom
-    my $sep  = shift || " $uv ";
-    my @dta  = @_;
+    my $csvA = $type == 0 && $row_idx++ % 2   # Each odd data row
+                          && $opt_A && $opt_L # Only if aligned
+                          && $xls->[0]{parser} =~ m/::CSV/ ? 1 : 0;
+    my $back = $csvA ? "\e[40;37;7m" : "";
+
+    $sep ||= " $uv ";
     if ($opt_L) {
 	$type > 0 and $sep =~ s/ /-/g;
 	if ($sep =~ m/$uv/) {
@@ -729,6 +727,7 @@ sub line {
 	    $sep =~ s/\|/+/;
 	    }
 	}
+    $csvA and @dta = map { "$back$_\e[0m" } @dta;
     my $line = join $sep => @dta;
     if ($opt_B) {
 	# Cannot use s///r for 5.8.x
@@ -758,4 +757,3 @@ END {
 	    }
 	}
     }
-
